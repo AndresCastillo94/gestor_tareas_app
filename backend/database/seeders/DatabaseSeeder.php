@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Task;
+use App\Models\TaskPriority;
+use App\Models\TaskStatus;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,11 +16,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        User::factory()->create(['email' =>'admin@admin.com']);
+        User::factory(4)->create();
+        TaskPriority::insert([
+            ['name' => 'Alta'],
+            ['name' => 'Media'],
+            ['name' => 'Baja']
         ]);
+        TaskStatus::insert([
+            ['name' => 'Pendiente'],
+            ['name' => 'En progreso'],
+            ['name' => 'Completada']
+        ]);
+        Task::factory(200)->create();
     }
 }
