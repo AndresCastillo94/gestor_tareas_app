@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use App\Http\Resources\TaskResource;
+use Symfony\Component\HttpFoundation\Response;
 
 class TaskController extends Controller
 {
@@ -19,7 +20,9 @@ class TaskController extends Controller
 
     public function store(Request $request){
 
+        $task = Task::create($request->all());
 
+        return response()->json(new TaskResource($task),Response::HTTP_CREATED);
 
     }
 
@@ -29,11 +32,19 @@ class TaskController extends Controller
 
     }
 
-    public function update(Request $request){
+    public function update(Request $request,Task $task){
+
+        $task->update($request->all());
+
+        return response()->json(new TaskResource($task),Response::HTTP_OK);
 
     }
 
     public function destroy(Task $task){
+
+        $task->delete();
+
+        return response()->json(null,Response::HTTP_NO_CONTENT);
 
     }
 
