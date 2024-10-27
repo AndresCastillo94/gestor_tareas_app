@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Models\User;
@@ -34,7 +35,7 @@ class AuthController extends Controller
 
     }
 
-    public function register(Request $request){
+    public function register(UserRequest $request){
 
         $user = User::create($request->all());
 
