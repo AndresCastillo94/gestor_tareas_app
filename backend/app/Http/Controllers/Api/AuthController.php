@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Models\User;
@@ -39,7 +40,9 @@ class AuthController extends Controller
 
         $user = User::create($request->all());
 
-        return response()->json($user,Response::HTTP_CREATED);
+        $token = JWTAuth::fromUser($user);
+
+        return response()->json(new UserResource($user,$token),Response::HTTP_CREATED);
 
     }
 
