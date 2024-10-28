@@ -1,4 +1,4 @@
-import { LoginRequest,LoginResponse,User } from "../login/interfaces/login.interfaces";
+import { LoginRequest,LoginResponse,User } from "../interfaces/login.interfaces";
 
 export const postLogin = async (loginData: LoginRequest): Promise<LoginResponse> => {
     const url = "http://127.0.0.1:8000/api/login";
@@ -24,14 +24,26 @@ export const postLogin = async (loginData: LoginRequest): Promise<LoginResponse>
     }
 };
 
-export const postRegister = (loginData: User): Promise<LoginResponse> => {
-    const url = "http://127.0.0.1:8000/api/login";
-    return fetch(url,{
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
+export const postRegister = async (loginData: User): Promise<LoginResponse> => {
+    const url = "http://127.0.0.1:8000/api/register";
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(loginData),
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json(); 
+            throw new Error(errorData.message || 'Error de autenticación');
         }
-    })
-        .then((response)=>response.json())
-        .then((data) => data.results)
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error en el fetch:', error);
+        throw error;
+    }
 }

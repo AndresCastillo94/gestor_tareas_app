@@ -1,44 +1,39 @@
 "use client"
 
-import { Span } from "next/dist/trace";
 import Link from "next/link";
 
-import{ useForm } from 'react-hook-form';
+import{ useForm,SubmitHandler } from 'react-hook-form';
+import { userShema } from "./validations/user.shema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { User } from "../interfaces/login.interfaces";
+import { postRegister } from "../services";
 
 function Register(){
 
-    const{ register,handleSubmit,formState:{errors},reset } =  useForm();
+    const{ register,handleSubmit,reset,formState:{errors} } =  useForm({
+        resolver: zodResolver(userShema)
+    });
 
-    const onSubmit = handleSubmit((data)=>{console.log(data); reset;})
+    const onSubmit: SubmitHandler<User> =  async (data)=>{
+        return await postRegister(data);
+    }
+
+    console.log(errors);
 
     return(
         <div className="auth-form">
             
-            <form onSubmit={onSubmit}>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <h1>Registro de usuario</h1>
                 <label htmlFor="name">Nombre</label>
                 <input type="text" id="name" 
-                    {...register('name',{
-                        required: {
-                            value:true,
-                            message: "Por favor ingresa tu nombre"
-                        }
-                    })}
+                    {...register('name')}
                 />
-                {errors.name && <span className="error-span">{errors.name.message}</span>}
+                {errors.name?.message && <span className="error-span">{errors.name?.message}</span>}
                 
                 <label htmlFor="email">Correo</label>
                 <input type="text" id="email" 
-                    {...register('email',{
-                        required: {
-                            value: true,
-                            message: "Por favor ingresa tu correo"
-                        },
-                        pattern: {
-                            value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-                            message: "Correo no válido", 
-                        }
-                    })}
+                    {...register('email')}
                 />
                 {errors.email && <span className="error-span">{errors.email.message}</span>}
                 
@@ -76,6 +71,8 @@ function Register(){
                 <Link href="/auth/login" >Login</Link>
                 
             </form>
+
+         
             
         </div>
     );
