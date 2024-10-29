@@ -1,0 +1,106 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+thead {
+    background-color: #4A90E2; /* Color de fondo del encabezado */
+}
+
+th {
+    padding: 12px;
+    text-align: left;
+    font-weight: bold;
+    color: #ffffff; /* Color del texto del encabezado */
+    border-bottom: 3px solid #3E7BB6; /* Bordes en el encabezado */
+    position: sticky; /* Hace que el encabezado sea pegajoso */
+    top: 0; /* Fija el encabezado en la parte superior */
+    z-index: 10; /* Asegura que esté sobre las filas */
+}
+
+tbody {
+    background-color: #ffffff; /* Color de fondo del cuerpo */
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd; /* Bordes en el cuerpo de la tabla */
+    transition: background-color 0.3s ease;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #f9f9f9; /* Color de fondo para filas impares */
+}
+
+tbody tr:hover {
+    background-color: #e8f0fe; /* Color de fondo al pasar el mouse en el cuerpo */
+}
+
+tr {
+    border-radius: 8px; /* Bordes redondeados en las filas */
+}
+
+table, th, td {
+    border: 1px solid #ddd; /* Bordes para la tabla, celdas y encabezados */
+}
+
+/* Estilos para centrar las últimas 3 columnas */
+th:nth-last-child(-n+4),
+td:nth-last-child(-n+4) {
+    text-align: center; /* Centra el texto */
+}
+
+
+@media (max-width: 600px) {
+    table {
+        font-size: 14px;
+    }
+    th, td {
+        padding: 10px;
+    }
+}
+
+/*Págination*/
+
+.pagination-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    font-family: Arial, sans-serif;
+    gap: 5px;
+}
+
+.pagination-info {
+    font-size: 1rem;
+    color: #333;
+}
+
+.pagination-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.pagination-buttons button {
+    background-color: #007bff;
+    color: #fff;
+    font-size: 1rem;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.pagination-buttons button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.pagination-buttons button:not(:disabled):hover {
+    background-color: #0056b3;
+}
+

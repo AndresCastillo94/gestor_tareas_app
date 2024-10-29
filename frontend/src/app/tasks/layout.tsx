@@ -2,6 +2,7 @@
 
 import { logout } from "../auth/services/auth.services";
 import { useRouter } from 'next/navigation';
+import './layout.css';
 
 function TaskContainer({children}:{children: React.ReactNode}){
 
@@ -19,7 +20,7 @@ function TaskContainer({children}:{children: React.ReactNode}){
                 <button onClick={handleOnclick}>Logout</button>
               </ul>
             </nav>
-            <div>{children}</div>
+            <div className="task-container">{children}</div>
         </div>
     );
 }

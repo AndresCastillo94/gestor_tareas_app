@@ -12,6 +12,7 @@
     "@hookform/resolvers": "^3.9.0",
     "@reduxjs/toolkit": "^2.3.0",
     "@tanstack/react-router": "^1.77.6",
+    "@tanstack/react-table": "^8.20.5",
     "js-cookie": "^3.0.5",
     "next": "14.2.16",
     "react": "^18",

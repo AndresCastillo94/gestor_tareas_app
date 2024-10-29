@@ -3,19 +3,25 @@
 // import { useEffect, useState } from 'react';
 import { getTasks } from './services/tasks.services';
 import Cookies from "js-cookie";
+import { DynamicTable }  from '../../components';
 
 
 
     
 async function Tasks() {
 
-    console.log("token page: ",Cookies.get("authToken"))
 
-    const tasks = await getTasks();
+    const tasksObtained = await getTasks();
+
+    const tasks = tasksObtained.data;
+
+   
 
     return (
         <div>
-            <pre>{JSON.stringify(tasks, null, 2)}</pre>
+            <DynamicTable dataTask = {tasks} ></DynamicTable>
+            <pre>{}</pre>
+            {/* <pre>{JSON.stringify(tasks, null, 2)}</pre> */}
             {/* {error && <p>{error}</p>}
             {tasks ? (
                 <pre>{JSON.stringify(tasks, null, 2)}</pre>
