@@ -7,6 +7,10 @@ import { userShema } from "./validations/user.shema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { User } from "../interfaces/login.interfaces";
 import { postRegister } from "../services";
+import { useRouter } from 'next/navigation';
+import { useDispatch } from "react-redux";
+import { setToken } from '../../store/authSlice'; 
+
 
 function Register(){
 
@@ -14,11 +18,18 @@ function Register(){
         resolver: zodResolver(userShema)
     });
 
-    const onSubmit: SubmitHandler<User> =  async (data)=>{
-        return await postRegister(data);
-    }
+    const dispatch = useDispatch();
+    const router = useRouter();
 
-    console.log(errors);
+    const onSubmit: SubmitHandler<User> = async (credenciales) => {
+        try {
+            const data = await postRegister(credenciales);
+            dispatch(setToken(data.token));
+            router.push("/tasks"); 
+        } catch (error) {
+            console.error("Error al registrar:", error);
+        }
+    };
 
     return(
         <div className="auth-form">
@@ -40,32 +51,16 @@ function Register(){
                 
                 <label htmlFor="name">Contraseña</label>
                 <input type="password" id="password" 
-                    {...register('password',{
-                        required: {
-                            value: true,
-                            message: "Contraseña es requerida",
-                          },
-                          minLength: {
-                            value: 6,
-                            message: "Contraseña debe ser mayor a 6 caracteres",
-                          },
-                    })}
+                    {...register('password')}
                 />
                 {errors.password && <span className="error-span">{errors.password.message}</span>}
                 
                 
                 <label htmlFor="confirmPassword">Confirma contraseña</label>
                 <input type="password" id="confirmPassword"  
-                    {...register('confirmPassword',{
-                        required: {
-                            value: true,
-                            message: "Por favor ingresa nuevamente tu contraseña"
-                        },
-                        validate:(value)=> value === password.current || "Las contraseñas no coinciden"
-                        
-                    })}
+                    {...register('confirmPassword')}
                 />
-                {errors.password && <span className="error-span">{errors.confirmPassword.message}</span>}
+                {errors.confirmPassword && <span className="error-span">{errors.confirmPassword.message}</span>}
 
                 <button>Registrar</button>
                 <Link href="/auth/login" >Login</Link>

@@ -1,63 +1,53 @@
 "use client";
 
 import { postLogin } from '../services';
+import{ useForm,SubmitHandler } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { setToken } from '../../store/auth.slice'; 
-import { useState } from 'react';
+import { setToken } from '../../store/authSlice'; 
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { loginUserShema } from "./validations/loginUser.shema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { LoginRequest } from "../interfaces/login.interfaces";
 
 
 
 function Login(){
+    
+    const{ register,handleSubmit,reset,formState:{errors} } =  useForm({
+        resolver: zodResolver(loginUserShema)
+    });
+
     const dispatch = useDispatch();
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
     const router = useRouter();
 
-    const handleLogin = async (e: React.FormEvent) => {
-        e.preventDefault();
-        
+    const onSubmit: SubmitHandler<LoginRequest> = async (credenciales) => {
         try {
-            const loginData = { email, password };
-            const data = await postLogin(loginData); 
-            if (data&&data.token) {
-                dispatch(setToken(data.token)); 
-                router.push('/');
-            } else {
-                setError('El token no fue recibido');
-            }
-        } catch (err) {
-            console.error('Login failed:', err);
-            setError('Credenciales erroneas');
+            const data = await postLogin(credenciales);
+            dispatch(setToken(data.token));
+            router.push("/tasks"); 
+        } catch (error) {
+            console.error("Error al registrar:", error);
         }
     };
-
 
     return(
         <div className="auth-form">
             <h1>Login</h1>
-            <form onSubmit = {handleLogin}>
+            <form onSubmit = {handleSubmit(onSubmit)}>
                 
                     <label htmlFor="">E-mail</label>
-                    <input 
-                        type="email" 
-                        value={email} 
-                        onChange={(e) => setEmail(e.target.value)} 
-                        placeholder="Email" 
-                        required 
+                    <input type="text" id="email" 
+                    {...register('email')}
                     />
+                    {errors.email && <span className="error-span">{errors.email.message}</span>}
                
               
                     <label htmlFor="">Contraseña</label>
-                    <input 
-                        type="password" 
-                        value={password} 
-                        onChange={(e) => setPassword(e.target.value)} 
-                        placeholder="Password" 
-                        required 
-                    />
+                    <input type="password" id="password" 
+                    {...register('password')}
+                />
+                {errors.password && <span className="error-span">{errors.password.message}</span>}
                
                 <button type="submit" >Ingresar</button>
                 <Link href="/auth/register" >¿Aún no estás registrado/a?</Link>
