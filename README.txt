@@ -34,7 +34,7 @@ Los siguientes en las presentes versiones o superiores:
 3. Abrir una terminal sobre la carpeta backend y correr los siguientes comandos desde la carpeta backend
  - composer install
  - php artisan key:generate  (al mensaje adjunto marcar yes y enter)
- - php artisan migrate --seed
+ - php artisan migrate --seed y marcar yes al mensaje de creación de la base de datos (en este punto se debe encender una conexión a MySQL segun lo indicado en los programas requisito)
  - php artisan serve 
 4. Abrir otra terminal y correr los siguientes comandos desde la carpeta frontend
   - npm install
