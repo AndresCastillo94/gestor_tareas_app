@@ -30,15 +30,22 @@ Los siguientes en las presentes versiones o superiores:
 
 
 1. Clonar el proyectro desde GitHub
-2. Abrir una terminal y dirigirse a la carpeta backend del proyecto y generar un archivo .env a partir del .env.example icluido en el proyecto con los datos de la base de datos a usar en local.
-3. Correr los siguientes comandos desde la carpeta backend
+2. Dirigirse a la carpeta backend en la raiz del proyecto gestor_tarreas_app/backend, copiar el contenido del archivo .env.example y pegarlo en un nuevo archivo .env y guardar los cambios
+3. Abrir una terminal sobre la carpeta backend y correr los siguientes comandos desde la carpeta backend
  - composer install
- - php artisan key:generate
- - php artisan migrate
- - php artisan serve (opcional en caso de que no se corra el  backend desde el Apache de Laragon o    Xampp)
+ - php artisan key:generate  (al mensaje adjunto marcar yes y enter)
+ - php artisan migrate --seed
+ - php artisan serve 
 4. Abrir otra terminal y correr los siguientes comandos desde la carpeta frontend
   - npm install
   - npm run dev
 5. Posicionar la siguiente url en el navegador http://127.0.0.1:3000/login
+
+Se puede ingresar con el usuario:
+correo: admin@admin.com
+contraseña: password
+
+O puede crear un nuevo usuario en la opción de registro
+
 
 
