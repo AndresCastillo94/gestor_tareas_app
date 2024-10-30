@@ -1,3 +1,5 @@
+/*Tabla*/
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -7,50 +9,50 @@ table {
 }
 
 thead {
-    background-color: #4A90E2; /* Color de fondo del encabezado */
+    background-color: #4A90E2; 
 }
 
 th {
     padding: 12px;
     text-align: left;
     font-weight: bold;
-    color: #ffffff; /* Color del texto del encabezado */
-    border-bottom: 3px solid #3E7BB6; /* Bordes en el encabezado */
-    position: sticky; /* Hace que el encabezado sea pegajoso */
-    top: 0; /* Fija el encabezado en la parte superior */
-    z-index: 10; /* Asegura que esté sobre las filas */
+    color: #ffffff;
+    border-bottom: 3px solid #3E7BB6; 
+    position: sticky; 
+    top: 0; 
+    z-index: 10; 
 }
 
 tbody {
-    background-color: #ffffff; /* Color de fondo del cuerpo */
+    background-color: #ffffff; 
 }
 
 td {
     padding: 12px;
-    border-bottom: 1px solid #ddd; /* Bordes en el cuerpo de la tabla */
+    border-bottom: 1px solid #ddd;
     transition: background-color 0.3s ease;
 }
 
 tbody tr:nth-child(odd) {
-    background-color: #f9f9f9; /* Color de fondo para filas impares */
+    background-color: #f9f9f9; 
 }
 
 tbody tr:hover {
-    background-color: #e8f0fe; /* Color de fondo al pasar el mouse en el cuerpo */
+    background-color: #e8f0fe;
 }
 
 tr {
-    border-radius: 8px; /* Bordes redondeados en las filas */
+    border-radius: 8px; 
 }
 
 table, th, td {
-    border: 1px solid #ddd; /* Bordes para la tabla, celdas y encabezados */
+    border: 1px solid #ddd; 
 }
 
-/* Estilos para centrar las últimas 3 columnas */
+
 th:nth-last-child(-n+4),
 td:nth-last-child(-n+4) {
-    text-align: center; /* Centra el texto */
+    text-align: center; 
 }
 
 

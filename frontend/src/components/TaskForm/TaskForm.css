@@ -3,13 +3,13 @@
     top: 50%;
     left: 50%; 
     transform: translate(-50%, -50%);
-    background-color: #ffffff; /* Fondo blanco */
+    background-color: #ffffff; 
     padding: 40px; 
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    width: 600px; /* Mayor ancho para el modal */
-    border-radius: 12px; /* Esquinas redondeadas */
-    border: 1px solid #e0e0e0; /* Borde sutil */
-    animation: fadeIn 0.3s; /* Animación al abrir */
+    width: 600px; 
+    border-radius: 12px; 
+    border: 1px solid #e0e0e0; 
+    animation: fadeIn 0.3s; 
 }
 
 @keyframes fadeIn {
@@ -22,20 +22,20 @@
 }
 
 h1 {
-    text-align: center; /* Centra el título */
-    color: #333; /* Color del texto */
-    margin-bottom: 20px; /* Espaciado inferior */
+    text-align: center; 
+    color: #333; 
+    margin-bottom: 20px; 
 }
 
 form {
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Espacio entre elementos del formulario */
+    gap: 15px; 
 }
 
 label {
     font-weight: bold;
-    color: #444; /* Color del texto */
+    color: #444; 
 }
 
 input, select {
@@ -43,35 +43,35 @@ input, select {
     border: 1px solid #ccc;
     border-radius: 8px;
     margin-bottom: 10px;
-    width: 100%; /* Asegúrate de que el input y select ocupen el ancho completo */
-    transition: border-color 0.3s, box-shadow 0.3s; /* Transición suave */
-    font-size: 16px; /* Tamaño de fuente más grande */
+    width: 100%; 
+    transition: border-color 0.3s, box-shadow 0.3s; 
+    font-size: 16px; 
 }
 
 input:focus, select:focus {
-    border-color: #007BFF; /* Color al enfocar */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Sombra al enfocar */
-    outline: none; /* Sin contorno predeterminado */
+    border-color: #007BFF; 
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
+    outline: none; 
 }
 
 .error-span {
-    color: #ff0000; /* Color de error más fuerte */
+    color: #ff0000; 
     font-size: 0.9em;
 }
 
 button[type="submit"], button[type="button"] {
-    background-color: #007BFF; /* Azul para el botón de ingresar */
+    background-color: #007BFF; 
     color: white;
     padding: 12px;
     border: none;
-    border-radius: 8px; /* Bordes redondeados */
+    border-radius: 8px; 
     cursor: pointer;
     margin-top: 10px;
-    font-size: 16px; /* Tamaño de fuente */
-    transition: background-color 0.3s, transform 0.2s; /* Transición suave */
+    font-size: 16px; 
+    transition: background-color 0.3s, transform 0.2s; 
 }
 
 button[type="submit"]:hover, button[type="button"]:hover {
-    background-color: #0056b3; /* Color más oscuro al pasar el mouse */
-    transform: scale(1.05); /* Escala al pasar el mouse */
+    background-color: #0056b3; 
+    transform: scale(1.05); 
 }

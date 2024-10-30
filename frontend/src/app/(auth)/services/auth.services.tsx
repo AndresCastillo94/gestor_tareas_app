@@ -3,7 +3,7 @@ import { addUser } from '../../store/userSlice';
 import Cookies from "js-cookie";
 
 
-export const postLogin = async (loginData: LoginRequest,dispatch): Promise<LoginResponse> => {
+export const postLogin = async (loginData: LoginRequest,dispatch)  => {
     const url = "http://127.0.0.1:8000/api/login";
     try {
         const response = await fetch(url, {

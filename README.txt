@@ -1,0 +1,42 @@
+App gestora de tareas
+
+
+Esta App permite el manejo de tareas para multiples usuarios, cada uno de ellos podrá tener acceso privado a un listado de tareas de su autoría y la opción de crear nuevas tareas de manera personalizada.
+
+El siguiente proyecto cuenta con un backend en Laravel 11 y frontend en NextJs 14
+
+Implementa:
+
+- API RESTful
+- Autenticación JWT
+- Validación de datos desde el backend y frontend
+- Migraciones de base de datos
+- interfaz de usuario con opciones Read (con páginación) y Create del CRUD
+- Manejo de estado global con Redux
+- SSR y CSR
+
+
+
+Requisitos de ejecución:
+
+Los siguientes en las presentes versiones o superiores:
+
+- PHP 8.2.12
+- Composer 2.7.9
+- MySQL 8.0.3
+- Laravel installer 5.8.5
+- Laravel 11.29.0
+- Node Js 20.18.0
+
+
+1. Se debe posicionar el proyecto en la carpeta publica de XAMPP o Laravel o en su defecto se debe usar el servidor de Laravel para correr el proyecto en una ubicación distinta a la propuesta.
+2. Correr los siguientes comandos desde la carpeta backend
+ - composer install
+ - php artisan migrate
+ - php artisan serve (opcional en caso de que no se corra el  backend desde el Apache de Laragon o    Xampp)
+3. Correr los siguientes comandos desde la carpeta frontend
+  - npm install
+  - npm run dev
+4. Posicionar la siguiente url en el navegador http://127.0.0.1:3000/login
+
+
