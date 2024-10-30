@@ -29,14 +29,14 @@ Los siguientes en las presentes versiones o superiores:
 - Node Js 20.18.0
 
 
-1. Se debe posicionar el proyecto en la carpeta publica de XAMPP o Laravel o en su defecto se debe usar el servidor de Laravel para correr el proyecto en una ubicación distinta a la propuesta.
-2. Dirigirse a la carpeta backend del proyecto y generar un archivo .env a partir del .env.example icluido en el proyecto con los datos de la base de datos a usar en local.
+1. Clonar el proyectro desde GitHub
+2. Abrir una terminal y dirigirse a la carpeta backend del proyecto y generar un archivo .env a partir del .env.example icluido en el proyecto con los datos de la base de datos a usar en local.
 3. Correr los siguientes comandos desde la carpeta backend
  - composer install
  - php artisan key:generate
  - php artisan migrate
  - php artisan serve (opcional en caso de que no se corra el  backend desde el Apache de Laragon o    Xampp)
-4. Correr los siguientes comandos desde la carpeta frontend
+4. Abrir otra terminal y correr los siguientes comandos desde la carpeta frontend
   - npm install
   - npm run dev
 5. Posicionar la siguiente url en el navegador http://127.0.0.1:3000/login
