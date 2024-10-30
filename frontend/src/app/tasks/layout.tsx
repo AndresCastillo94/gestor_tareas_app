@@ -14,13 +14,13 @@ function TaskContainer({children}:{children: React.ReactNode}){
     }
 
     return(
-        <div>
+        <div >
             <nav>
               <ul>
                 <button onClick={handleOnclick}>Logout</button>
               </ul>
             </nav>
-            <div className="task-container">{children}</div>
+            <div >{children}</div>
         </div>
     );
 }

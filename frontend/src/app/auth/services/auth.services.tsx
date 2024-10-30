@@ -1,8 +1,10 @@
 import { LoginRequest,LoginResponse,User } from "../interfaces/login.interfaces";
+import { addUser } from '../../store/userSlice';
+import { useDispatch } from 'react-redux';
 import Cookies from "js-cookie";
 
 
-export const postLogin = async (loginData: LoginRequest): Promise<LoginResponse> => {
+export const postLogin = async (loginData: LoginRequest,dispatch): Promise<LoginResponse> => {
     const url = "http://127.0.0.1:8000/api/login";
     try {
         const response = await fetch(url, {
@@ -20,7 +22,7 @@ export const postLogin = async (loginData: LoginRequest): Promise<LoginResponse>
 
         const data = await response.json();
 
-        
+        dispatch(addUser(data.name));
         Cookies.set("authToken", data.token, { secure: true, sameSite: 'strict' });
         return data;
     } catch (error) {
@@ -48,7 +50,7 @@ export const postRegister = (loginData: User): Promise<LoginResponse> => {
         return response.json();
     })
     .then((data) => {
-        Cookies.set("authToken",JSON.stringify(data.token))
+        Cookies.set("authToken", data.token, { secure: true, sameSite: 'strict' });
         return data as LoginResponse;
     })
     .catch((error) => {

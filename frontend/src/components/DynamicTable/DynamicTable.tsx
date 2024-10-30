@@ -3,6 +3,7 @@
 import { useReactTable,getCoreRowModel,flexRender,getPaginationRowModel } from "@tanstack/react-table";
 import './DynamicTable.css';
 import { useState } from "react";
+import { useSelector } from 'react-redux';
 
 
 type TasksData = {
@@ -55,6 +56,7 @@ function DynamicTable({dataTask}: Props){
         },
         
     ]
+    const user = useSelector((state) => state.user);
 
     const [data,setData] = useState(dataTask);
     const [pageIndex, setPageIndex] = useState(0);
@@ -77,6 +79,7 @@ function DynamicTable({dataTask}: Props){
 
     return(
         <div>
+            <p>Bienvenido, {user.name}</p>
             <table>
                 <thead>
                     {

@@ -9,7 +9,6 @@ import { User } from "../interfaces/login.interfaces";
 import { postRegister } from "../services";
 import { useRouter } from 'next/navigation';
 import { useDispatch } from "react-redux";
-import { setToken } from '../../store/authSlice'; 
 
 
 function Register(){
@@ -23,8 +22,7 @@ function Register(){
 
     const onSubmit: SubmitHandler<User> = async (credenciales) => {
         try {
-            const data = await postRegister(credenciales);
-            dispatch(setToken(data.token));
+            await postRegister(credenciales);
             router.push("/tasks"); 
         } catch (error) {
             console.error("Error al registrar:", error);

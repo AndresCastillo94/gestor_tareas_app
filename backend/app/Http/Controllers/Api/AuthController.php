@@ -24,17 +24,19 @@ class AuthController extends Controller
             ],Response::HTTP_UNPROCESSABLE_ENTITY); //422
         }
 
-        return response()->json(compact('token'),Response::HTTP_OK);;
+        $user = JWTAuth::user();
+
+        return response()->json(new UserResource($user,$token),Response::HTTP_OK);;
 
     }
 
-    public function logout(){
+    // public function logout(){
 
-        JWTAuth::invalidate(JWTAuth::getToken());
+    //     JWTAuth::invalidate(JWTAuth::getToken());
 
-        return response()->json(['message' => 'El usuario se ha deslogueado satisfactoriamente'], Response::HTTP_OK);
+    //     return response()->json(['message' => 'El usuario se ha deslogueado satisfactoriamente'], Response::HTTP_OK);
 
-    }
+    // }
 
     public function register(UserRequest $request){
 

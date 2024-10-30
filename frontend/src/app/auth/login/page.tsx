@@ -3,7 +3,6 @@
 import { postLogin } from '../services';
 import{ useForm,SubmitHandler } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { setToken } from '../../store/authSlice'; 
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { loginUserShema } from "./validations/loginUser.shema";
@@ -23,9 +22,8 @@ function Login(){
 
     const onSubmit: SubmitHandler<LoginRequest> = async (credenciales) => {
         try {
-            const data = await postLogin(credenciales);
-            dispatch(setToken(data.token));
-            router.push("/tasks"); 
+            const data = await postLogin(credenciales,dispatch);
+            router.push(`/tasks`);
         } catch (error) {
             console.error("Error al registrar:", error);
         }
