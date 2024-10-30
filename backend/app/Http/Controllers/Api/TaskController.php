@@ -21,7 +21,7 @@ class TaskController extends Controller
             $tasks_query->where('user_id', $user_id);
         }
 
-        $tasks = $tasks_query->get();
+        $tasks = $tasks_query->orderBy('created_at', 'desc')->get();
         
 
         return TaskResource::collection($tasks);
