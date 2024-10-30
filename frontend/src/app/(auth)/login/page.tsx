@@ -20,7 +20,7 @@ function Login(){
     const dispatch = useDispatch();
     const router = useRouter();
 
-    const onSubmit: SubmitHandler<LoginRequest> = async (credenciales) => {
+    const onSubmit = async (credenciales) => {
         try {
             const data = await postLogin(credenciales,dispatch);
             router.push(`/tasks`);
