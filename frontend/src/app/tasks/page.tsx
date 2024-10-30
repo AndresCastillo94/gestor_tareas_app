@@ -1,10 +1,11 @@
 //"use client";
 
 // import { useEffect, useState } from 'react';
-import { getTasks } from './services/tasks.services';
+import { getTasks } from './services/getTasks.service';
 import Cookies from "js-cookie";
 import { DynamicTable }  from '../../components';
 import { CreateTaskButton } from 'app/components';
+
 
 
 
@@ -23,7 +24,7 @@ async function Tasks() {
             <h1>Gestor de Tareas</h1>
             
             <CreateTaskButton/>
-            <DynamicTable dataTask = {tasks} >
+                <DynamicTable dataTask = {tasks} >
                 
             </DynamicTable>
             <pre>{}</pre>

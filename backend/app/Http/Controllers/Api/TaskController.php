@@ -11,11 +11,20 @@ use Symfony\Component\HttpFoundation\Response;
 
 class TaskController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
 
-        $tasks = TaskResource::collection(Task::with('task_status','task_priority','user')->get());
+        $user_id = $request->query('user_id');
 
-        return $tasks;
+        $tasks_query= Task::with('task_status','task_priority','user');
+
+        if($user_id){
+            $tasks_query->where('user_id', $user_id);
+        }
+
+        $tasks = $tasks_query->get();
+        
+
+        return TaskResource::collection($tasks);
 
     }
 

@@ -48,7 +48,7 @@ function Login(){
                 {errors.password && <span className="error-span">{errors.password.message}</span>}
                
                 <button type="submit" >Ingresar</button>
-                <Link href="/auth/register" >¿Aún no estás registrado/a?</Link>
+                <Link href="/register" >¿Aún no estás registrado/a?</Link>
             </form> 
         </div>
     )

@@ -1,6 +1,5 @@
 import { LoginRequest,LoginResponse,User } from "../interfaces/login.interfaces";
 import { addUser } from '../../store/userSlice';
-import { useDispatch } from 'react-redux';
 import Cookies from "js-cookie";
 
 
@@ -22,8 +21,9 @@ export const postLogin = async (loginData: LoginRequest,dispatch): Promise<Login
 
         const data = await response.json();
 
-        dispatch(addUser(data.name));
+        dispatch(addUser(data));
         Cookies.set("authToken", data.token, { secure: true, sameSite: 'strict' });
+        Cookies.set("id_u", data.id, { secure: true, sameSite: 'strict' });
         return data;
     } catch (error) {
         console.error('Error en el fetch:', error);
@@ -31,7 +31,7 @@ export const postLogin = async (loginData: LoginRequest,dispatch): Promise<Login
     }
 };
 
-export const postRegister = (loginData: User): Promise<LoginResponse> => {
+export const postRegister = (loginData: User,dispatch): Promise<LoginResponse> => {
     const url = "http://127.0.0.1:8000/api/register";
 
     return fetch(url, {
@@ -50,6 +50,7 @@ export const postRegister = (loginData: User): Promise<LoginResponse> => {
         return response.json();
     })
     .then((data) => {
+        dispatch(addUser(data));
         Cookies.set("authToken", data.token, { secure: true, sameSite: 'strict' });
         return data as LoginResponse;
     })

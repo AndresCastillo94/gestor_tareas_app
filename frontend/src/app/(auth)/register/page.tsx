@@ -22,7 +22,7 @@ function Register(){
 
     const onSubmit: SubmitHandler<User> = async (credenciales) => {
         try {
-            await postRegister(credenciales);
+            await postRegister(credenciales,dispatch);
             router.push("/tasks"); 
         } catch (error) {
             console.error("Error al registrar:", error);
@@ -61,7 +61,7 @@ function Register(){
                 {errors.confirmPassword && <span className="error-span">{errors.confirmPassword.message}</span>}
 
                 <button>Registrar</button>
-                <Link href="/auth/login" >Login</Link>
+                <Link href="/login" >¿Ya tienes una cuenta creada?</Link>
                 
             </form>
 

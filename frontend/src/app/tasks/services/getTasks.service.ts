@@ -3,14 +3,17 @@
 import { cookies } from "next/headers";
 import { useRouter } from 'next/navigation';
 
-export const getTasks = async () => {
-    const url = "http://127.0.0.1:8000/api/tasks/";
 
+export const getTasks = async () => {
+    const cookieStore = cookies();
+    const userId = cookieStore.get('id_u')?.value;
+
+    const url = `http://127.0.0.1:8000/api/tasks?user_id=${userId}`;
 
 
     try{
         
-        const cookieStore = cookies();
+        
         const token = cookieStore.get('authToken')?.value;
 
         
