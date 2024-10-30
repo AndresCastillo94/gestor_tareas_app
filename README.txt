@@ -30,7 +30,7 @@ Los siguientes en las presentes versiones o superiores:
 
 
 1. Clonar el proyectro desde GitHub
-2. Dirigirse a la carpeta backend en la raiz del proyecto gestor_tarreas_app/backend, copiar el contenido del archivo .env.example y pegarlo en un nuevo archivo .env y guardar los cambios
+2. Dirigirse a la carpeta backend en la raiz del proyecto (gestor_tareas_app/backend), copiar el contenido del archivo .env.example y pegarlo en un nuevo archivo .env al interior de la misma carpeta backend y guardar los cambios
 3. Abrir una terminal sobre la carpeta backend y correr los siguientes comandos desde la carpeta backend
  - composer install
  - php artisan key:generate  (al mensaje adjunto marcar yes y enter)
