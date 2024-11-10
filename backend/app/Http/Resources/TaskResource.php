@@ -20,7 +20,9 @@ class TaskResource extends JsonResource
             'description' => $this->description,
             'end_date' => $this->end_date,
             'user' => $this->user?->name,
+            'task_status_id' => $this->task_status_id,
             'task_status' => $this->task_status?->name,
+            'task_priority_id' => $this->task_priority_id,
             'task_priority' => $this->task_priority?->name
         ];
     }
