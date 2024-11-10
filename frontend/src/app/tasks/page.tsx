@@ -1,41 +1,27 @@
-//"use client";
 
-// import { useEffect, useState } from 'react';
 import { getTasks } from './services/getTasks.service';
-import Cookies from "js-cookie";
-import { DynamicTable }  from '../../components';
+import { DynamicTable,TaskUi }  from '../../components';
 import { CreateTaskButton } from 'app/components';
-
+import { cookies } from 'next/headers';
 
 
 
     
 async function Tasks() {
 
-
-    const tasksObtained = await getTasks();
+    const cookieStore = cookies();
+    const userId = cookieStore.get('id_u')?.value || '';
+    const token = cookieStore.get('authToken')?.value || '';
+    
+    const tasksObtained = await getTasks(userId, token);
 
     const tasks = tasksObtained.data;
     
-   
+    console.log(tasks)
 
     return (
-        <div className="task-container">
-            <h1>Gestor de Tareas</h1>
-            
-            <CreateTaskButton/>
-                <DynamicTable dataTask = {tasks} >
-                
-            </DynamicTable>
-            <pre>{}</pre>
-            {/* <pre>{JSON.stringify(tasks, null, 2)}</pre> */}
-            {/* {error && <p>{error}</p>}
-            {tasks ? (
-                <pre>{JSON.stringify(tasks, null, 2)}</pre>
-            ) : (
-                <p>Cargando tareas...</p>
-            )} */}
-        </div>
+        <TaskUi tasks = {tasks} />
+        
     );
 }
 

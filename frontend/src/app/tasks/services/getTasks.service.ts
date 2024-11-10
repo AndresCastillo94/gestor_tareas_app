@@ -1,12 +1,12 @@
 
 // import Cookies from "js-cookie";
-import { cookies } from "next/headers";
-import { useRouter } from 'next/navigation';
+//import { cookies } from "next/headers";
+//import { useRouter } from 'next/navigation';
 
 
-export const getTasks = async () => {
-    const cookieStore = cookies();
-    const userId = cookieStore.get('id_u')?.value;
+export const getTasks = async (userId: string, token: string) => {
+    // const cookieStore = cookies();
+    // const userId = cookieStore.get('id_u')?.value;
 
     const url = `http://127.0.0.1:8000/api/tasks?user_id=${userId}`;
 
@@ -14,7 +14,7 @@ export const getTasks = async () => {
     try{
         
         
-        const token = cookieStore.get('authToken')?.value;
+        // const token = cookieStore.get('authToken')?.value;
 
         
         const response = await fetch(url,{

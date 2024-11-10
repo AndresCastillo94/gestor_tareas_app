@@ -1,12 +1,13 @@
 import ReactDOM from "react-dom";
 import './Modal.css';
+import TaskForm from "../TaskForm/TaskForm";
 
-function Modal({ onClose, children }) {
+function Modal({ onClose }) {
     return ReactDOM.createPortal(
         <div id="modal-overlay" onClick={onClose}>
             <div id="modal-container" onClick={e => e.stopPropagation()}>
                 <h1>Nueva Tarea</h1>
-                {children}
+                    <TaskForm onClose={onClose}/>
                 <button onClick={onClose}>Cerrar</button>
             </div>
         </div>,

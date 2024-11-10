@@ -9,18 +9,20 @@ import { TfiPencilAlt } from 'react-icons/tfi';
 import deleteTask from '../../app/tasks/services/deleteTask.service'
 
 
-type TasksData = {
+type Task = {
     id: number;
     title: string;
     description: string;
     end_date: string;
     user: string;
+    task_status_id: number;
     task_status: string;
+    task_priority_id: number;
     task_priority: string;
 }
 
 interface Props{
-    dataTask: TasksData[];
+    dataTask: Task[];
 }
 
 
@@ -35,8 +37,8 @@ function DynamicTable({dataTask}: Props){
         }
     }
 
-    const handleUpdate = async (props: Object) =>{
-        console.table(props);
+    const handleUpdate = async (task: Task) =>{
+        console.table(task);
     }
 
     const columns = [
@@ -75,7 +77,7 @@ function DynamicTable({dataTask}: Props){
             accessorKey: '',
             cell: (props) => 
             <p>
-                {/* <button onClick={() => handleDelete(props.row.original)}><TfiPencilAlt/></button>   */}
+                <button onClick={() => handleUpdate(props.row.original)}><TfiPencilAlt/></button>  
                 <button onClick={() => handleDelete(props.row.original.id)}><MdOutlineDeleteOutline/></button>  
             </p>
         },

@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import Modal from '../Modal/Modal';
-import TaskForm from '../TaskForm/TaskForm';
 import './CreateTaskButton.css'
 
 function CreateTaskButton(){
@@ -22,9 +21,7 @@ function CreateTaskButton(){
         <>
             <button onClick={handleClick}>Crear tarea</button>
             {openModal && (
-                <Modal onClose={handleCloseModal}>
-                    <TaskForm onClose={handleCloseModal}/>
-                </Modal>
+                <Modal onClose={handleCloseModal}/>
             )}
         </>
     )
