@@ -35,6 +35,10 @@ function DynamicTable({dataTask}: Props){
         }
     }
 
+    const handleUpdate = async (props: Object) =>{
+        console.table(props);
+    }
+
     const columns = [
         {
             header: 'TITULO',
@@ -71,8 +75,8 @@ function DynamicTable({dataTask}: Props){
             accessorKey: '',
             cell: (props) => 
             <p>
-                <button onClick={() => handleDelete(props.row.original.id)}><TfiPencilAlt/></button>  
-                {/* <button onClick={() => handleDelete(props.row.original.id)}><MdOutlineDeleteOutline/></button>   */}
+                {/* <button onClick={() => handleDelete(props.row.original)}><TfiPencilAlt/></button>   */}
+                <button onClick={() => handleDelete(props.row.original.id)}><MdOutlineDeleteOutline/></button>  
             </p>
         },
         
