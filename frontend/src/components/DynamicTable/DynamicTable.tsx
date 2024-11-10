@@ -4,6 +4,9 @@ import { useReactTable,getCoreRowModel,flexRender,getPaginationRowModel } from "
 import './DynamicTable.css';
 import { useState } from "react";
 import { useSelector } from 'react-redux';
+import { MdOutlineDeleteOutline } from 'react-icons/md';
+import { TfiPencilAlt } from 'react-icons/tfi';
+import deleteTask from '../../app/tasks/services/deleteTask.service'
 
 
 type TasksData = {
@@ -22,6 +25,15 @@ interface Props{
 
 
 function DynamicTable({dataTask}: Props){
+
+    const handleDelete = async (id) =>{
+        const deleteResult = await deleteTask(id);
+        if(deleteResult.success){
+            setData(data.filter(task => task.id !== id))
+        }else{
+            alert("No se pudo eliminar esta tarea, intentalo de nuevo")
+        }
+    }
 
     const columns = [
         {
@@ -53,6 +65,15 @@ function DynamicTable({dataTask}: Props){
             header: 'PRIORIDAD',
             accessorKey: 'task_priority',
             cell: (props) => <p>{props.getValue()}</p>
+        },
+        {
+            header: 'HERRAMIENTAS',
+            accessorKey: '',
+            cell: (props) => 
+            <p>
+                <button onClick={() => handleDelete(props.row.original.id)}><TfiPencilAlt/></button>  
+                {/* <button onClick={() => handleDelete(props.row.original.id)}><MdOutlineDeleteOutline/></button>   */}
+            </p>
         },
         
     ]

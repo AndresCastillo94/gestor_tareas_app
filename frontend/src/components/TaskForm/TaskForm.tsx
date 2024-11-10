@@ -20,6 +20,7 @@ function TaskForm({onClose}){
         try {
             await postTask({ ...task, user_id: id_user });
             onClose();
+            
         } catch (error) {
             console.error("Error al registrar:", error);
         }
