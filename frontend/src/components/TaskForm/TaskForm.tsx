@@ -68,8 +68,6 @@ function TaskForm({onClose,dataTask,setDataTask,toUpdateTask}: Props){
         }
     };
 
-    //console.log(selectedTask);
-
     return(
         <>
             <form onSubmit = {handleSubmit(onSubmit)}>

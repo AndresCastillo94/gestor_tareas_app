@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react";
-import CreateTaskButton from "../CreateTaskButton/CreateTaskButton";
 import DynamicTable from "../DynamicTable/DynamicTable";
 import Modal from "../Modal/Modal";
 
