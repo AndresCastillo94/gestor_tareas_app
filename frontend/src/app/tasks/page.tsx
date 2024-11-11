@@ -19,7 +19,6 @@ async function Tasks() {
 
     return (
         <TaskUi tasks = {tasks} />
-        
     );
 }
 

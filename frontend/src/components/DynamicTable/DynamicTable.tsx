@@ -26,12 +26,12 @@ interface Props{
 }
 
 
-function DynamicTable({dataTask,modalOn}: Props){
+function DynamicTable({dataTask,setDataTask,modalOn}: Props){
 
     const handleDelete = async (id) =>{
         const deleteResult = await deleteTask(id);
         if(deleteResult.success){
-            setData(data.filter(task => task.id !== id))
+            setDataTask(dataTask.filter(task => task.id !== id))
         }else{
             alert("No se pudo eliminar esta tarea, intentalo de nuevo")
         }
@@ -84,8 +84,8 @@ function DynamicTable({dataTask,modalOn}: Props){
         
     ]
     const user = useSelector((state) => state.user);
-
-    const [data,setData] = useState(dataTask);
+    const data = dataTask;
+    
     const [pageIndex, setPageIndex] = useState(0);
     const [pageSize, setPageSize] = useState(4);
 

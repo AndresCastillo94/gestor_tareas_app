@@ -1,15 +1,33 @@
 
+"use client"
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { TaskShema } from "./validations/TaskShema";
 import { SubmitHandler, useForm } from "react-hook-form";
 import './TaskForm.css'
-import { postTask } from "app/app/tasks/services/createTask.service";
-import Cookies from "js-cookie";
+import postTask from "app/app/tasks/services/createTask.service";
 import putTask from "app/app/tasks/services/updateTask.service";
+import Cookies from "js-cookie";
+import { useEffect } from "react";
+
+type Task = {
+    id: number;
+    title: string;
+    description: string;
+    end_date: string;
+    user: string;
+    task_status_id: number;
+    task_status: string;
+    task_priority_id: number;
+    task_priority: string;
+}
+
+interface Props{
+    dataTask: Task[];
+}
 
 
-function TaskForm({onClose,toUpdateTask}){
+function TaskForm({onClose,dataTask,setDataTask,toUpdateTask}: Props){
 
     const{ register,handleSubmit,reset,formState:{errors} } =  useForm({
         resolver: zodResolver(TaskShema)
@@ -22,10 +40,26 @@ function TaskForm({onClose,toUpdateTask}){
     const onSubmit = async (task) => {
         try {
             if(!toUpdateTask){
-                await postTask({ ...task, user_id: id_user });
+                const createResponse = await postTask({ ...task, user_id: id_user });
+                if(createResponse.success){
+                    const dataTaskCreate = [createResponse.data,...dataTask];
+                    setDataTask(dataTaskCreate);
+                }else{
+                    alert("No se pudo crear esta tarea, intentalo de nuevo")
+                }
                 onClose();
             }else{
-                await putTask({ ...task, user_id: id_user, id: toUpdateTask.id });
+                const updateResponse = await putTask({ ...task, user_id: id_user, id: toUpdateTask.id });
+                if(updateResponse.success){
+                    const index = dataTask.findIndex((obj) => obj.id === toUpdateTask.id);
+                    if(index !== -1){
+                        const dataTaskUpdate = [...dataTask];
+                        dataTaskUpdate[index] = updateResponse.data;
+                        setDataTask(dataTaskUpdate);
+                    }
+                }else{
+                    alert("No se pudo crear esta tarea, intentalo de nuevo")
+                }
                 onClose();
             }
             
@@ -84,7 +118,7 @@ function TaskForm({onClose,toUpdateTask}){
 
                 <input type="hidden" {...register('user_id')} value={id_user} />
             
-            <button type="submit" >Crear Tarea</button>
+            <button type="submit" >{toUpdateTask?"Actualizar tarea":"Crear tarea"}</button>
         </form> 
         </>
     );

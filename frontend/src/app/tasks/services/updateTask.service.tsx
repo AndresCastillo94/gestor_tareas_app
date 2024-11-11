@@ -6,7 +6,7 @@ async function putTask(task: Task){
     const token =  Cookies.get('authToken');
 
     try{
-        await fetch(url,{ 
+        const response = await fetch(url,{ 
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -14,8 +14,10 @@ async function putTask(task: Task){
             },
             body: JSON.stringify(task)
         });
+
+        const data = await response.json();
         
-        return { success: true }
+        return { success: true, data: data}
 
     }catch(error){
         console.error(`Error al actualizar el registro ${task.id}`)

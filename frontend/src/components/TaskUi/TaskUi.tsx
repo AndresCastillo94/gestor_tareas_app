@@ -7,8 +7,9 @@ import Modal from "../Modal/Modal";
 
 function TaskUi({tasks}){
 
-    const [openModal,setOpenModal] = useState(false);
-    const [selectedTask, setSelectedTask] = useState(null);
+    const [openModal,setOpenModal] = useState(false); // open and close modal
+    const [selectedTask, setSelectedTask] = useState(null); // Handle selected task
+    const [dataTask,setDataTask] = useState(tasks);
 
     const modalOn = (task) => {
         setSelectedTask(task);
@@ -26,11 +27,11 @@ function TaskUi({tasks}){
         <div className="task-container">
             <h1>Gestor de Tareas</h1>
             
-            <CreateTaskButton/>
-            <DynamicTable dataTask = {tasks} modalOn = {modalOn} />
+            <button onClick={() => modalOn()}>Crear tarea</button>
+            <DynamicTable dataTask = {dataTask} setDataTask = {setDataTask} modalOn = {modalOn} />
 
             {openModal && (
-                <Modal onClose = {handleCloseModal} selectedTask = {selectedTask} />
+                <Modal onClose = {handleCloseModal} dataTask = {dataTask} setDataTask = {setDataTask} selectedTask = {selectedTask} />
             )}
                 
             
