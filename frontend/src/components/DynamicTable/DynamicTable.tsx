@@ -26,7 +26,7 @@ interface Props{
 }
 
 
-function DynamicTable({dataTask}: Props){
+function DynamicTable({dataTask,modalOn}: Props){
 
     const handleDelete = async (id) =>{
         const deleteResult = await deleteTask(id);
@@ -38,7 +38,7 @@ function DynamicTable({dataTask}: Props){
     }
 
     const handleUpdate = async (task: Task) =>{
-        console.table(task);
+        modalOn(task);
     }
 
     const columns = [

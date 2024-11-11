@@ -16,8 +16,6 @@ async function Tasks() {
     const tasksObtained = await getTasks(userId, token);
 
     const tasks = tasksObtained.data;
-    
-    console.log(tasks)
 
     return (
         <TaskUi tasks = {tasks} />

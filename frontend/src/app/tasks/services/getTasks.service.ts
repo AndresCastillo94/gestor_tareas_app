@@ -13,10 +13,6 @@ export const getTasks = async (userId: string, token: string) => {
 
     try{
         
-        
-        // const token = cookieStore.get('authToken')?.value;
-
-        
         const response = await fetch(url,{
             method: 'GET',
             headers: {
