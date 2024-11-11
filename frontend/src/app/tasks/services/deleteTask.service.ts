@@ -10,7 +10,7 @@ async function deleteTask (task_id: number){
 
     try{
 
-        await fetch(url,{
+        const response =  await fetch(url,{
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -20,6 +20,11 @@ async function deleteTask (task_id: number){
                 path: '/tasks'
             })
         })
+
+        if(response.status === 401 || response.status === 403){
+            console.log("Token expirado")
+            return { success: false, message: "Token expirado, por favor logueate de nuevo" }
+        }
 
         return { success: true }
 

@@ -16,6 +16,12 @@ async function postTask(task: Task){
             body: JSON.stringify(task)
         })
 
+
+        if(response.status === 401 || response.status === 403){
+            console.log("Token expirado")
+            return { success: false, message: "Token expirado, por favor logueate de nuevo" }
+        }
+
         const data = await response.json();
         
         return { success: true, data: data}

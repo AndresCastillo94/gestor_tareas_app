@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import { MdOutlineDeleteOutline } from 'react-icons/md';
 import { TfiPencilAlt } from 'react-icons/tfi';
 import deleteTask from '../../app/tasks/services/deleteTask.service'
+import { useRouter } from "next/navigation";
 
 
 type Task = {
@@ -28,12 +29,17 @@ interface Props{
 
 function DynamicTable({dataTask,setDataTask,modalOn}: Props){
 
+    const user = useSelector((state) => state.user);
+    const router = useRouter();
+    const data = dataTask;
+
     const handleDelete = async (id) =>{
         const deleteResult = await deleteTask(id);
         if(deleteResult.success){
-            setDataTask(dataTask.filter(task => task.id !== id))
+            setDataTask(dataTask.filter(task => task.id !== id));
         }else{
-            alert("No se pudo eliminar esta tarea, intentalo de nuevo")
+            alert(deleteResult.message);
+            router.push("/login");
         }
     }
 
@@ -83,8 +89,7 @@ function DynamicTable({dataTask,setDataTask,modalOn}: Props){
         },
         
     ]
-    const user = useSelector((state) => state.user);
-    const data = dataTask;
+    
     
     const [pageIndex, setPageIndex] = useState(0);
     const [pageSize, setPageSize] = useState(4);

@@ -9,6 +9,7 @@ import postTask from "app/app/tasks/services/createTask.service";
 import putTask from "app/app/tasks/services/updateTask.service";
 import Cookies from "js-cookie";
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 type Task = {
     id: number;
@@ -32,8 +33,9 @@ function TaskForm({onClose,dataTask,setDataTask,toUpdateTask}: Props){
     const{ register,handleSubmit,reset,formState:{errors} } =  useForm({
         resolver: zodResolver(TaskShema)
     });
-    const id_user = Cookies.get('id_u');
 
+    const id_user = Cookies.get('id_u');
+    const router = useRouter();
 
 
     
@@ -45,7 +47,8 @@ function TaskForm({onClose,dataTask,setDataTask,toUpdateTask}: Props){
                     const dataTaskCreate = [createResponse.data,...dataTask];
                     setDataTask(dataTaskCreate);
                 }else{
-                    alert("No se pudo crear esta tarea, intentalo de nuevo")
+                    alert(createResponse.message);
+                    router.push("/login");
                 }
                 onClose();
             }else{
@@ -58,7 +61,8 @@ function TaskForm({onClose,dataTask,setDataTask,toUpdateTask}: Props){
                         setDataTask(dataTaskUpdate);
                     }
                 }else{
-                    alert("No se pudo crear esta tarea, intentalo de nuevo")
+                    alert(updateResponse.message);
+                    router.push("/login");
                 }
                 onClose();
             }

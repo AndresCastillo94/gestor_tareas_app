@@ -21,13 +21,19 @@ export const getTasks = async (userId: string, token: string) => {
             }
         })
 
-        if(!response.ok){
-            const errorData = await response.json();
-            throw new Error(errorData.message);
+        if(response.status === 401 || response.status === 403){
+            return { success: false, message: "Token expirado, redirigiendo a login para revalidar credenciales" }
         }else{
-            return await response.json()
+            const data = await response.json();
+
+            if(!response.ok){
+                const errorData = await response.json();
+                throw new Error(errorData.message);
+            }else{
+                return { success:true, data: data.data }
+            }
         }
-        
+
 
     }catch(error){
 
