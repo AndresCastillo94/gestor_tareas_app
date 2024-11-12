@@ -16,7 +16,7 @@ function Modal({ onClose,dataTask,setDataTask,selectedTask }:ModalProps) {
     return ReactDOM.createPortal(
         <div id="modal-overlay" onClick={onClose}>
             <div id="modal-container" onClick={e => e.stopPropagation()}>
-                <div><button onClick={onClose}>X</button></div>
+                <div><button className="close-button" onClick={onClose}>X</button></div>
                 <h1>{selectedTask?`Actualizando tarea: ${selectedTask.title}`:"Nueva tarea"}</h1>
                 <TaskForm onClose={onClose} dataTask = {dataTask} setDataTask = {setDataTask} toUpdateTask = {selectedTask}/>
             </div>

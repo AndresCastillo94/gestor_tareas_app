@@ -75,10 +75,10 @@ function DynamicTable({dataTask,setDataTask,modalOn}: tableProps){
             header: 'HERRAMIENTAS',
             accessorKey: '',
             cell: (props: CellContext<Task, unknown>) => 
-            <p>
+            <div className="mutate-buttons-container">
                 <button onClick={() => handleUpdate(props.row.original)}><TfiPencilAlt/></button>  
                 <button onClick={() => handleDelete(props.row.original.id)}><MdOutlineDeleteOutline/></button>  
-            </p>
+            </div>
         },
         
     ]

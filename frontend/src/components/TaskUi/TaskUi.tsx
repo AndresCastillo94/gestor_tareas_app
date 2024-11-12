@@ -26,7 +26,7 @@ function TaskUi({tasks}){
         <div className="task-container">
             <h1>Gestor de Tareas</h1>
             
-            <button onClick={() => modalOn()}>Crear tarea</button>
+            <button className="button" onClick={() => modalOn()}>Crear tarea</button>
             <DynamicTable dataTask = {dataTask} setDataTask = {setDataTask} modalOn = {modalOn} />
 
             {openModal && (
