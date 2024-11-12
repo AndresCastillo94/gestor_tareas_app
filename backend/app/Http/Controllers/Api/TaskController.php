@@ -7,6 +7,9 @@ use App\Http\Requests\TaskRequest;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use App\Http\Resources\TaskResource;
+use App\Mail\TaskMail;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Symfony\Component\HttpFoundation\Response;
 
 class TaskController extends Controller
@@ -32,6 +35,14 @@ class TaskController extends Controller
 
         $task = Task::create($request->all());
 
+        if($task->task_priority_id == 1 && $task->task_status_id != 3){
+            try {
+                Mail::to($task->user->email)->send(new TaskMail($task));
+            } catch (\Exception $e) {
+                Log::error('Error al enviar el correo: ' . $e->getMessage());
+            }
+        }
+
         return response()->json(new TaskResource($task),Response::HTTP_CREATED);
 
     }
@@ -45,6 +56,14 @@ class TaskController extends Controller
     public function update(TaskRequest $request,Task $task){
 
         $task->update($request->all());
+
+        if($task->task_priority_id == 1 && $task->task_status_id != 3){
+            try {
+                Mail::to($task->user->email)->send(new TaskMail($task));
+            } catch (\Exception $e) {
+                Log::error('Error al enviar el correo: ' . $e->getMessage());
+            }
+        }
 
         return response()->json(new TaskResource($task),Response::HTTP_OK);
 
