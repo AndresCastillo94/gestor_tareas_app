@@ -1,7 +1,7 @@
 
 
 
-export const getTasks = async (userId: string, token: string) => {
+const getTasks = async (userId: string, token: string) => {
 
     const url = `http://127.0.0.1:8000/api/tasks?user_id=${userId}`;
 
@@ -38,3 +38,5 @@ export const getTasks = async (userId: string, token: string) => {
     }
 
 }
+
+export default getTasks;

@@ -5,8 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { TaskShema } from "./validations/TaskShema";
 import { SubmitHandler, useForm } from "react-hook-form";
 import './TaskForm.css'
-import postTask from "app/app/tasks/services/createTask.service";
-import putTask from "app/app/tasks/services/updateTask.service";
+import { postTask,putTask } from "../../app/tasks/services";
 import Cookies from "js-cookie";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";

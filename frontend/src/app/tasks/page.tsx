@@ -1,5 +1,5 @@
 
-import { getTasks } from './services/getTasks.service';
+import { getTasks } from './services';
 import { DynamicTable,TaskUi }  from '../../components';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';

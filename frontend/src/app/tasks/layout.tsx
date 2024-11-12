@@ -2,14 +2,16 @@
 
 import { logout } from "../(auth)/services/auth.services";
 import { useRouter } from 'next/navigation';
+import { useDispatch } from "react-redux";
 import './layout.css';
 
 function TaskContainer({children}:{children: React.ReactNode}){
 
     const router = useRouter();
+    const dispatch = useDispatch();
 
     const handleOnclick = () => {
-        logout();
+        logout(dispatch);
         router.push('/login');
     }
 
