@@ -135,20 +135,20 @@ function DynamicTable({dataTask,setDataTask,modalOn}: tableProps){
             <table>
                 <thead>
                 {
-            table.getHeaderGroups().map(headerGroup => (
-                <tr key={headerGroup.id}>
-                    {headerGroup.headers.map(header => (
-                        <th key={header.id}>
-                            {flexRender(header.column.columnDef.header, header.getContext())}
-                            {header.column.columnDef.Filter && (
-                                <div>
-                                    {flexRender(header.column.columnDef.Filter, header.getContext())}
-                                </div>
-                            )}
-                        </th>
-                    ))}
-                </tr>
-            ))}
+                    table.getHeaderGroups().map(headerGroup => (
+                        <tr key={headerGroup.id}>
+                            {headerGroup.headers.map(header => (
+                                <th key={header.id}>
+                                    {flexRender(header.column.columnDef.header, header.getContext())}
+                                    {header.column.columnDef.Filter && (
+                                        <div>
+                                            {flexRender(header.column.columnDef.Filter, header.getContext())}
+                                        </div>
+                                    )}
+                                </th>
+                            ))}
+                        </tr>
+                ))}
                 </thead> 
                 <tbody>
                     {
