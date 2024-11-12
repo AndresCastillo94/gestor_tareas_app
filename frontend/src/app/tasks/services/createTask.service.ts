@@ -1,5 +1,4 @@
 import Cookies from "js-cookie";
-import { Task } from "./interfaces/task.interface";
 
 async function postTask(task: Task){
     const url = "http://127.0.0.1:8000/api/tasks";

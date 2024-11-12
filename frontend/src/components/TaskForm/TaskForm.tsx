@@ -11,24 +11,15 @@ import Cookies from "js-cookie";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-type Task = {
-    id: number;
-    title: string;
-    description: string;
-    end_date: string;
-    user: string;
-    task_status_id: number;
-    task_status: string;
-    task_priority_id: number;
-    task_priority: string;
-}
-
-interface Props{
+interface TaskFormProps {
+    onClose: () => void;
     dataTask: Task[];
+    setDataTask: React.Dispatch<React.SetStateAction<Task[]>>;
+    toUpdateTask?: Task;  
 }
 
 
-function TaskForm({onClose,dataTask,setDataTask,toUpdateTask}: Props){
+function TaskForm({onClose,dataTask,setDataTask,toUpdateTask}: TaskFormProps){
 
     const{ register,handleSubmit,reset,formState:{errors} } =  useForm({
         resolver: zodResolver(TaskShema)
@@ -42,27 +33,27 @@ function TaskForm({onClose,dataTask,setDataTask,toUpdateTask}: Props){
     const onSubmit = async (task) => {
         try {
             if(!toUpdateTask){
-                const createResponse = await postTask({ ...task, user_id: id_user });
-                if(createResponse.success){
-                    const dataTaskCreate = [createResponse.data,...dataTask];
-                    setDataTask(dataTaskCreate);
-                }else{
+                const createResponse:TaskMutateResponse = await postTask({ ...task, user_id: id_user });
+                if(createResponse.success === false){
                     alert(createResponse.message);
                     router.push("/login");
+                }else{
+                    const dataTaskCreate = [createResponse.data,...dataTask];
+                    setDataTask(dataTaskCreate);
                 }
                 onClose();
             }else{
-                const updateResponse = await putTask({ ...task, user_id: id_user, id: toUpdateTask.id });
-                if(updateResponse.success){
+                const updateResponse:TaskMutateResponse = await putTask({ ...task, user_id: id_user, id: toUpdateTask.id });
+                if(updateResponse.success === false){
+                    alert(updateResponse.message);
+                    router.push("/login");
+                }else{
                     const index = dataTask.findIndex((obj) => obj.id === toUpdateTask.id);
                     if(index !== -1){
                         const dataTaskUpdate = [...dataTask];
                         dataTaskUpdate[index] = updateResponse.data;
                         setDataTask(dataTaskUpdate);
                     }
-                }else{
-                    alert(updateResponse.message);
-                    router.push("/login");
                 }
                 onClose();
             }

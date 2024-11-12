@@ -1,8 +1,6 @@
 
 
 import Cookies from "js-cookie";
-import { revalidatePath } from "next/cache";
-import { NextResponse } from "next/server";
 
 async function deleteTask (task_id: number){
     const url = `http://127.0.0.1:8000/api/tasks/${task_id}`;

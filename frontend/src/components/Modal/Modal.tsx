@@ -3,9 +3,15 @@
 import ReactDOM from "react-dom";
 import './Modal.css';
 import TaskForm from "../TaskForm/TaskForm";
-import { useEffect } from "react";
 
-function Modal({ onClose,dataTask,setDataTask,selectedTask }) {
+interface ModalProps {
+    onClose: () => void;
+    dataTask: Task[];
+    setDataTask: React.Dispatch<React.SetStateAction<Task[]>>;
+    selectedTask?: Task;  
+}
+
+function Modal({ onClose,dataTask,setDataTask,selectedTask }:ModalProps) {
 
     return ReactDOM.createPortal(
         <div id="modal-overlay" onClick={onClose}>

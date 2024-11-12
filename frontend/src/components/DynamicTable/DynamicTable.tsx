@@ -3,37 +3,30 @@
 import { useReactTable,getCoreRowModel,flexRender,getPaginationRowModel } from "@tanstack/react-table";
 import './DynamicTable.css';
 import { useState } from "react";
-import { useSelector } from 'react-redux';
+import { useSelector} from 'react-redux';
+import { RootState } from '../../app/store/store';
 import { MdOutlineDeleteOutline } from 'react-icons/md';
 import { TfiPencilAlt } from 'react-icons/tfi';
 import deleteTask from '../../app/tasks/services/deleteTask.service'
 import { useRouter } from "next/navigation";
+import { CellContext } from "@tanstack/react-table";
 
-
-type Task = {
-    id: number;
-    title: string;
-    description: string;
-    end_date: string;
-    user: string;
-    task_status_id: number;
-    task_status: string;
-    task_priority_id: number;
-    task_priority: string;
-}
-
-interface Props{
+interface tableProps {
     dataTask: Task[];
+    setDataTask: React.Dispatch<React.SetStateAction<Task[]>>;
+    modalOn: (task: Task) => void;
 }
 
 
-function DynamicTable({dataTask,setDataTask,modalOn}: Props){
+function DynamicTable({dataTask,setDataTask,modalOn}: tableProps){
 
-    const user = useSelector((state) => state.user);
+    
+
+    const user = useSelector((state: RootState) => state.user);
     const router = useRouter();
     const data = dataTask;
 
-    const handleDelete = async (id) =>{
+    const handleDelete = async (id:number) =>{
         const deleteResult = await deleteTask(id);
         if(deleteResult.success){
             setDataTask(dataTask.filter(task => task.id !== id));
@@ -51,37 +44,37 @@ function DynamicTable({dataTask,setDataTask,modalOn}: Props){
         {
             header: 'TITULO',
             accessorKey: 'title',
-            cell: (props) => <p>{props.getValue()}</p>
+            cell: (props: CellContext<Task, unknown>) => <p>{props.getValue() as string}</p>
         },
         {
             header: 'DESCRIPCION',
             accessorKey: 'description',
-            cell: (props) => <p>{props.getValue()}</p>
+            cell: (props: CellContext<Task, unknown>) => <p>{props.getValue() as string}</p>
         },
         {
             header: 'FECHA VENCIMIENTO',
             accessorKey: 'end_date',
-            cell: (props) => <p>{props.getValue()}</p>
+            cell: (props: CellContext<Task, unknown>) => <p>{props.getValue() as string}</p>
         },
         {
             header: 'CREADOR',
             accessorKey: 'user',
-            cell: (props) => <p>{props.getValue()}</p>
+            cell: (props: CellContext<Task, unknown>) => <p>{props.getValue() as string}</p>
         },
         {
             header: 'ESTADO',
             accessorKey: 'task_status',
-            cell: (props) => <p>{props.getValue()}</p>
+            cell: (props: CellContext<Task, unknown>) => <p>{props.getValue() as string}</p>
         },
         {
             header: 'PRIORIDAD',
             accessorKey: 'task_priority',
-            cell: (props) => <p>{props.getValue()}</p>
+            cell: (props: CellContext<Task, unknown>) => <p>{props.getValue() as string}</p>
         },
         {
             header: 'HERRAMIENTAS',
             accessorKey: '',
-            cell: (props) => 
+            cell: (props: CellContext<Task, unknown>) => 
             <p>
                 <button onClick={() => handleUpdate(props.row.original)}><TfiPencilAlt/></button>  
                 <button onClick={() => handleDelete(props.row.original.id)}><MdOutlineDeleteOutline/></button>  
@@ -119,7 +112,7 @@ function DynamicTable({dataTask,setDataTask,modalOn}: Props){
                             <tr key = {headerGroup.id}>
                                 {headerGroup.headers.map(header => ( 
                                     <th key = {header.id}>
-                                        {header.column.columnDef.header}
+                                        {flexRender(header.column.columnDef.header, header.getContext())}
                                     </th>
                                 ))
                                 }

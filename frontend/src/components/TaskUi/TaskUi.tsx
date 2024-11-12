@@ -6,8 +6,8 @@ import Modal from "../Modal/Modal";
 
 function TaskUi({tasks}){
 
-    const [openModal,setOpenModal] = useState(false); // open and close modal
-    const [selectedTask, setSelectedTask] = useState(null); // Handle selected task
+    const [openModal,setOpenModal] = useState(false); 
+    const [selectedTask, setSelectedTask] = useState(null); 
     const [dataTask,setDataTask] = useState(tasks);
 
     const modalOn = (task) => {
