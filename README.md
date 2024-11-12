@@ -39,7 +39,7 @@ Los siguientes en las presentes versiones o superiores:
 4. Abrir otra terminal y correr los siguientes comandos desde la carpeta frontend
   - npm install
   - npm run dev
-5. Posicionar la siguiente url en el navegador http://127.0.0.1:3000/login
+5. Posicionar la siguiente url en el navegador http://127.0.0.1:3000/login (puede ser también http://localhost:3000/tasks todo dependiendo del mensaje arrojado por el comando npm run)
 
 Se puede ingresar con el usuario:
 correo: admin@admin.com

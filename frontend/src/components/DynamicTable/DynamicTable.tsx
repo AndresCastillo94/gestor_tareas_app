@@ -27,12 +27,15 @@ function DynamicTable({dataTask,setDataTask,modalOn}: tableProps){
     const data = dataTask;
 
     const handleDelete = async (id:number) =>{
-        const deleteResult = await deleteTask(id);
-        if(deleteResult.success){
-            setDataTask(dataTask.filter(task => task.id !== id));
-        }else{
-            alert(deleteResult.message);
-            router.push("/login");
+        const isConfirmed = window.confirm("¿Estás seguro/a de que quieres eliminar esta tarea?");
+        if(isConfirmed){
+            const deleteResult = await deleteTask(id);
+            if(deleteResult.success){
+                setDataTask(dataTask.filter(task => task.id !== id));
+            }else{
+                alert(deleteResult.message);
+                router.push("/login");
+            }
         }
     }
 
