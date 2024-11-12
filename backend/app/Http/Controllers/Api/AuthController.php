@@ -18,7 +18,7 @@ class AuthController extends Controller
 
         $credencials = $request->only('email','password');
 
-        if(!$token = JWTAuth::attempt($credencials)){
+        if(!$token = JWTAuth::attempt($credencials,['exp' => now()->addHours(4)->timestamp])){
             return response()->json([
                 'message' => 'Las credenciales son incorrectas'
             ],Response::HTTP_UNPROCESSABLE_ENTITY); //422
@@ -42,7 +42,7 @@ class AuthController extends Controller
 
         $user = User::create($request->all());
 
-        $token = JWTAuth::fromUser($user);
+        $token = JWTAuth::fromUser($user,['exp' => now()->addHours(4)->timestamp]);
 
         return response()->json(new UserResource($user,$token),Response::HTTP_CREATED);
 
