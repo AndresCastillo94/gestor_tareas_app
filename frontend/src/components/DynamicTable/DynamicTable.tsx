@@ -1,6 +1,6 @@
 "use client"
 
-import { useReactTable,getCoreRowModel,flexRender,getPaginationRowModel } from "@tanstack/react-table";
+import { useReactTable,getCoreRowModel,flexRender,getPaginationRowModel,getFilteredRowModel } from "@tanstack/react-table";
 import './DynamicTable.css';
 import { useState } from "react";
 import { useSelector} from 'react-redux';
@@ -67,12 +67,35 @@ function DynamicTable({dataTask,setDataTask,modalOn}: tableProps){
         {
             header: 'ESTADO',
             accessorKey: 'task_status',
-            cell: (props: CellContext<Task, unknown>) => <p>{props.getValue() as string}</p>
-        },
+            cell: (props: CellContext<Task, unknown>) => <p>{props.getValue() as string}</p>,
+            enableColumnFilter: true,
+            Filter: ({ column }) => (
+                <select
+                    onChange={e => column.setFilterValue(e.target.value || undefined)}
+                    value={column.getFilterValue() || ""}
+                >
+                <option value="">Todos</option>
+                <option value="Pendiente">Pendiente</option>
+                <option value="En progreso">En progreso</option>
+                <option value="Completada">Completada</option>
+              </select>
+            ),
+          },
         {
             header: 'PRIORIDAD',
             accessorKey: 'task_priority',
-            cell: (props: CellContext<Task, unknown>) => <p>{props.getValue() as string}</p>
+            cell: (props: CellContext<Task, unknown>) => <p>{props.getValue() as string}</p>,
+            Filter: ({ column }) => (
+                <select
+                    onChange={e => column.setFilterValue(e.target.value || undefined)}
+                    value={column.getFilterValue() || ""}
+                >
+                <option value="">Todas</option>
+                <option value="Baja">Baja</option>
+                <option value="Media">Media</option>
+                <option value="Alta">Alta</option>
+              </select>
+            ),
         },
         {
             header: 'HERRAMIENTAS',
@@ -95,6 +118,7 @@ function DynamicTable({dataTask,setDataTask,modalOn}: tableProps){
         columns,
         getCoreRowModel:getCoreRowModel(),
         getPaginationRowModel:getPaginationRowModel(),
+        getFilteredRowModel: getFilteredRowModel(),
         // state:{
         //     pagination:{
         //         pageSize:4,
@@ -110,18 +134,21 @@ function DynamicTable({dataTask,setDataTask,modalOn}: tableProps){
             <p>Bienvenido, {user.name}</p>
             <table>
                 <thead>
-                    {
-                        table.getHeaderGroups().map(headerGroup => (
-                            <tr key = {headerGroup.id}>
-                                {headerGroup.headers.map(header => ( 
-                                    <th key = {header.id}>
-                                        {flexRender(header.column.columnDef.header, header.getContext())}
-                                    </th>
-                                ))
-                                }
-                            </tr>
-                        ))
-                    }
+                {
+            table.getHeaderGroups().map(headerGroup => (
+                <tr key={headerGroup.id}>
+                    {headerGroup.headers.map(header => (
+                        <th key={header.id}>
+                            {flexRender(header.column.columnDef.header, header.getContext())}
+                            {header.column.columnDef.Filter && (
+                                <div>
+                                    {flexRender(header.column.columnDef.Filter, header.getContext())}
+                                </div>
+                            )}
+                        </th>
+                    ))}
+                </tr>
+            ))}
                 </thead> 
                 <tbody>
                     {
